@@ -1,0 +1,41 @@
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  /* HEADER - MENU */
+  .header__resp {
+    display: none;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header__nav {
+    margin-top: 35px;
+  }
+
+  /* MAIN */
+  .hero-content {
+    padding: 15px;
+    width: 300px;
+  }
+
+  .hero-headline {
+    font-size: 65px;
+    line-height: 65px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .btn-signup {
+    width: 100%;
+  }
+
+  /* FOOTER */
+  .copyrights {
+    text-align: center;
+    margin: 30px 0 30px;
+  }
+}
