@@ -9,9 +9,8 @@ const isEmailValid = (email) => {
   return re.test(email);
 };
 
-//En cas d'erreur sur mon champ de formulaire :
-// Je fais apparaître ma classe "error" qui va encadrer l'input en rouge
-// Et informer l'utilisateur avec un message indiquant l'erreur
+// If the input is incorrect (regarding the required methods):
+// An error message will appear to inform the user (red color with red borders on the inputs)
 const showError = (input, message) => {
   const formField = input.parentElement;
   formField.classList.remove("success");
@@ -20,9 +19,10 @@ const showError = (input, message) => {
   error.textContent = message;
 };
 
-//Si tout est OK sur mon champ de formulaire :
-// Je fais apparaître ma classe "success" qui va encadrer l'input en vert
-// Et informer l'utilisateur que l'entrée est valide
+//If everything is OK :
+// If the input is incorrect (regarding the required methods):
+// success message will appear (greenborders on the inputs + error messages display none)
+// To inform the user that the entry is valid
 const showSuccess = (input) => {
   const formField = input.parentElement;
   formField.classList.remove("error");
@@ -34,7 +34,8 @@ const showSuccess = (input) => {
 /*****
 BONUS
  *****/
-//Faire apparaitre "en direct" si un input est valide ou non
+//Let appear if the entry is valid or not
+//while completing the form
 const debounce = (fn, delay = 500) => {
   let timeoutId;
   return (...args) => {
@@ -42,13 +43,16 @@ const debounce = (fn, delay = 500) => {
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
-    // setup a new timer
+    //setup a new timer
     timeoutId = setTimeout(() => {
       fn.apply(null, args);
     }, delay);
   };
 };
 
+//Each input is checked and regarding the entry :
+//error with red legend
+//success with green legend
 form.addEventListener(
   "input",
   debounce(function (e) {

@@ -22,10 +22,13 @@ function launchModal() {
   modal.style.display = "block";
 }
 
-/***************************************************/
-const menuResp = document.querySelectorAll(".navResp");
-
+/******************
 //RESPONSIVE MENU REORGANISATION
+******************/
+
+//On "click" on the icon with the class(".navResp")
+//apply the "toggle()" method in order to hide/show the menu content
+const menuResp = document.querySelectorAll(".navResp");
 menuResp.forEach((el) =>
   el.addEventListener("click", (e) => {
     document.body.classList.toggle("menu__open");
@@ -35,20 +38,17 @@ menuResp.forEach((el) =>
 /*****
 TO DO 1/5 : CLOSE MODAL
 *****/
-//Je récupère ma classe ".close" qui correspond à l'icon de fermeture
-//de la modale.
+//On "click" on the icon with the class (".closeForm")
+//apply a "display : none" in order to close the inscription form
 const closeForm = document.querySelector(".closeForm");
-//Gestionnaire d'évènement : Au clic sur l'icon de fermeture
 closeForm.addEventListener("click", closeModal);
-//Fermer la modale avec l'ajout d'un display "none"
 function closeModal() {
   modal.style.display = "none";
 }
 
 /*****
 TO DO 2/5 & 3/5 : 
-IMPLEMENTER LES DONNEES DU FORMULAIRE
-MESSAGES ERREUR / VALIDATION
+CREATE ERROR & VALIDATION MESSAGES
 *****/
 const lastnameEl = document.querySelector("#lastname");
 const firstnameEl = document.querySelector("#firstname");
@@ -58,24 +58,29 @@ const gameQuantityEl = document.querySelector("#quantity");
 const conditionEl = document.querySelector("#checkbox1");
 const form = document.querySelector("#signup");
 
-//Validation du Nom
+//LastName Validation
 const checkLastname = () => {
   let valid = false;
   const min = 2;
   const lastnameRegex = /^[a-zA-ZèéêëïôöüñçÈÉÊËÏÔÖÜÑÇ ,.'-]/;
   const lastname = lastnameEl.value.trim();
+  // If input is empty :
   if (!isRequired(lastname)) {
     showError(lastnameEl, "Veuillez saisir votre nom");
+    // Or if entry is less than 2 characters :
   } else if (!isMinimum(lastname.length, min)) {
     showError(
       lastnameEl,
       `Votre saisie doit comporter au minimum ${min} caractères.`
     );
+    // Or if entry is numbers :
   } else if (!lastnameEl.value.trim().match(lastnameRegex)) {
+    // Call the showError function in order to inform user that something went wrong
     showError(
       lastnameEl,
       `Votre saisie ne peut contenir de caractères numériques.`
     );
+    // Call the showSuccess function in order to validate the entry
   } else {
     showSuccess(lastnameEl);
     valid = true;
@@ -83,7 +88,8 @@ const checkLastname = () => {
   return valid;
 };
 
-//Validation du Prénom
+//FirstName Validation
+//Same method as for the LastName Validation
 const checkFirstname = () => {
   let valid = false;
   const min = 2;
@@ -108,25 +114,30 @@ const checkFirstname = () => {
   return valid;
 };
 
-//Validation de l'adresse mail
+//Email Validation
 const checkEmail = () => {
   let valid = false;
   const email = emailEl.value.trim();
+  // If input is empty :
   if (!isRequired(email)) {
     showError(emailEl, "Veuillez saisir votre adresse mail");
+    // If entry is invalid (// regex in utils.js file) :
   } else if (!isEmailValid(email)) {
+    // Call the showError function in order to inform user that something went wrong
     showError(emailEl, "Votre adresse mail n'est pas valide.");
   } else {
+    // Call the showSuccess function in order to validate the entry
     showSuccess(emailEl);
     valid = true;
   }
   return valid;
 };
 
-//Validation de la date de naissance
+//Birthdate Validation
 const checkBirthdate = () => {
   let valid = false;
   const birthdate = birthdateEl.value.trim();
+  // If input is empty :
   if (!isRequired(birthdate)) {
     showError(birthdateEl, "Veuillez saisir votre date de naissance");
   } else {
@@ -136,14 +147,16 @@ const checkBirthdate = () => {
   return valid;
 };
 
-//Validation du nombre de participations
+//Participations Validation
 const checkGameQuantity = () => {
   let valid = false;
   const min = 0;
   const max = 100;
   const gameQuantity = gameQuantityEl.value.trim();
+  // If input is empty :
   if (!isRequired(gameQuantity)) {
     showError(gameQuantityEl, "Veuillez saisir un nombre");
+    // Or if entry is not between 0 and 100 :
   } else if (!isBetween(gameQuantity, min, max)) {
     showError(
       gameQuantityEl,
@@ -156,17 +169,21 @@ const checkGameQuantity = () => {
   return valid;
 };
 
-//Validation de ville selectionnée
+//City Validation
 const checkLocation = () => {
   let valid = false;
   const errorRadioLocation = document.getElementById("error_radioLocation");
   const radioButtons = document.getElementsByName("location");
   let radioValue;
+  //For each radio button :
   radioButtons.forEach((el) => {
     if (el.checked) radioValue = el.value;
   });
+  //If a city (radio button) is not selected
   if (!radioValue) {
+    //show an error message to advise the user that he must check a city
     errorRadioLocation.innerHTML = "Veuillez selectionner une ville";
+    //"Display block" in order to show the error message
     errorRadioLocation.style.display = "block";
   } else {
     valid = true;
@@ -174,7 +191,7 @@ const checkLocation = () => {
   return valid;
 };
 
-//Si une ville est selectionnée (au click), j'efface le message d'erreur
+//If a city is finally checked, the error message is in "display none" and disappears
 const hiddenMsg = document.querySelector("#error_radioLocation");
 window.onload = function () {
   let btn = document.getElementsByClassName("radiobtn");
@@ -185,10 +202,11 @@ window.onload = function () {
   }
 };
 
-//Bien que la case conditions d'utilisation soit déjà cochée dans le
-//HTML avec la mention "checked" dans le input correspondant,
-//Je m'assure que si l'utilisateur la décoche, un message d'erreur s'affiche
-//Demandant de cocher les conditions afin de permettre la validation
+//Even if "terms" are already cheched when opening the form
+//(See HTML document, input "checked")
+//MORE SECURITY WITH ADDING A CONDITION WHICH SAYS:
+//If user "unchecked" terms, show an error message that explains
+// terms must be checked in order to validate form
 const checkTerms = () => {
   let valid = false;
   const terms = document.getElementById("terms");
@@ -201,7 +219,7 @@ const checkTerms = () => {
   return valid;
 };
 
-//Je vérifie que l'ensemble de mes champs de formulaire est valide :
+//All form inputs are checked
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -222,11 +240,11 @@ form.addEventListener("submit", function (e) {
     isLocationValid &&
     isTermsValid;
 
-  //Si mon formulaire s'avère valide, je le reset et
-  //je fais apparaître un message de confirmation
+  //if form is valid : reset method
+  //And show a box with a confirmation message
   if (isFormValid) {
-    form.reset(); //Reset du formulaire et remise à zéro des entrées
-    showConfirmMessage(); //Message de confirmation d'envoi du formulaire
+    form.reset(); //form reset
+    showConfirmMessage(); //confirmation message
   }
 });
 
@@ -234,14 +252,15 @@ form.addEventListener("submit", function (e) {
 TO DO 4/5 : RESET FORM + CONFIRMATION MESSAGE
 *****/
 
-//Lorsque mon formulaire remplit toutes les conditions : form.reset();
-// ET j'ajoute un message de confirmation showConfirmMessage();
+//If form is valid : form.reset();
+//+ confirmation message :showConfirmMessage();
 const modalConfirm = document.getElementById("confirm__message");
 function showConfirmMessage() {
   form.style.display = "none";
   modalConfirm.style.display = "block";
 }
-//Sur mon message de confirmation, je créé un évènement afin de pouvoir fermer la modale au clic et revenir ainsi sur ma page d'accueil
+//On "click" on my confirmation message box "close" button
+//the box disappears ("display none") : return to main page + refresh ("reload" method)
 const closeConfirmMessage = document.querySelector(".btn__message");
 closeConfirmMessage.addEventListener("click", closeMessage);
 function closeMessage() {
@@ -250,5 +269,5 @@ function closeMessage() {
 }
 
 /*****
-TO DO 5/5 : TESTS MANUELS OK
+TO DO 5/5 : TESTS OK
 *****/
