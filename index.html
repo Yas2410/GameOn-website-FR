@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="GameOn : Gamer dans l'âme? Inscrivez-vous vite et participez à notre marathon national de jeux vidéos!">
+  <meta name="keywords" content="jeux, jeux vidéos, game, gamers, gaming, évènement, event, national, inscription">
+  <link rel="icon" type="image/png" href="public/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="public/css/style.css">
+  <link rel="stylesheet" type="text/css" href="public/css/mobile.css">
+  <link rel="stylesheet" type="text/css" href="public/css/tablet.css">
+  <title>GameOn : Le Marathon national de jeux vidéos!</title>
+</head>
+
+<body>
+  <!--MENU / NAV-->
+  <header class="header">
+    <div class="header__logo">
+      <img alt="Logo GameOn" src="public/img/Logo.png">
+    </div>
+    <button type="button" class="header__resp navResp">
+      <i class="fa fa-bars"></i>
+    </button>
+    <nav class="header__nav">
+      <!--<a href="javascript:void(0);" class="icon" onclick="editNav()">
+        <i class="fa fa-bars"></i>
+      </a>-->
+      <!--<a href="#">Accueil</a>-->
+      <a href="#" class="active">Détails de l'évènement</a>
+      <a href="#">À propos</a>
+      <a href="#">Contact</a>
+      <a href="#">Évènements passés</a>
+    </nav>
+  </header>
+
+  <!--MAIN / VIDEO GAMES MARATHON-->
+  <main>
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-headline">
+          Marathon national<br>
+          de jeux vidéos
+        </h1>
+        <p class="hero-text">
+          Vous aimez jouer ? Notre prochain évènement gaming est ouvert
+          aux réservations... Places limitées !
+        </p>
+        <button class="btn-signup openModal">
+          Je M'inscris
+        </button>
+      </div>
+      <div class="hero-img">
+        <img src="public/img/bg_img.jpg" alt="Photo illustrant un joueur">
+      </div>
+    </section>
+
+    <!--MAIN / INSCRIPTION FORM-->
+    <section class="bground">
+      <div class="content">
+        <div class="container">
+          <form id="signup" class="form" action="index.html" method="get">
+            <i class="closeForm fas fa-times"></i>
+            <div class="form__header">
+              <img src="public/img/logo.png" alt="Logo GameOn">
+              <h1>Formulaire d'Inscription</h1>
+            </div>
+
+            <div class="form__field">
+              <label for="lastname">Nom</label>
+              <input type="text" name="lastname" id="lastname" autocomplete="off"
+                placeholder="Veuillez entrer votre nom">
+              <small></small>
+            </div>
+
+            <div class="form__field">
+              <label for="firstname">Prénom</label>
+              <input type="text" name="firstname" id="firstname" autocomplete="off"
+                placeholder="Veuillez entrer votre prénom">
+              <small></small>
+            </div>
+
+            <div class="form__field">
+              <label for="Email">Email</label>
+              <input type="text" name="email" id="email" autocomplete="off"
+                placeholder="Veuillez entrer votre adresse mail">
+              <small></small>
+            </div>
+
+            <div class="form__field">
+              <label for="birthdate">Date de naissance</label>
+              <input type="date" name="birthdate" id="birthdate" autocomplete="off">
+              <small></small>
+            </div>
+
+            <div class="form__field">
+              <label for="quantity">A combien de tounois GameOn avez-vous déjà participé?</label>
+              <input type="number" name="quantity" id="quantity" autocomplete="off"
+                placeholder="Veuillez entrer le nombre de tournois">
+              <small></small>
+            </div>
+
+            <p>A quel tournoi souhaitez-vous participer cette année?</p>
+            <div class="form__field location">
+              <input class="checkbox__input" type="radio" name="location" id="location_1" value="New York">
+              <label class="checkbox__label" for="location_1">
+                <span class="checkbox__icon radiobtn"></span>
+                New York</label>
+              <input class="checkbox__input" type="radio" name="location" id="location_2" value="San Francisco">
+              <label class="checkbox__label" for="location_2">
+                <span class="checkbox__icon radiobtn"></span>
+                San Francisco</label>
+              <input class="checkbox__input" type="radio" name="location" id="location_3" value="Seattle">
+              <label class="checkbox__label" for="location_3">
+                <span class="checkbox__icon radiobtn"></span>
+                Seattle</label>
+              <input class=" checkbox__input" type="radio" name="location" id="location_4" value="Chicago">
+              <label class="checkbox__label" for="location_4">
+                <span class="checkbox__icon radiobtn"></span>
+                Chicago</label>
+              <input class="checkbox__input" type="radio" name="location" id="location_5" value="Boston">
+              <label class="checkbox__label" for="location_5">
+                <span class="checkbox__icon radiobtn"></span>
+                Boston</label>
+              <input class="checkbox__input" type="radio" name="location" id="location_6" value="Portland">
+              <label class="checkbox__label" for="location_6">
+                <span class="checkbox__icon radiobtn"></span>
+                Portland</label>
+              <span id="error_radioLocation" class="errorMsg"></span>
+            </div>
+
+            <div class="form__field checkbox">
+              <input class="checkbox__input" type="checkbox" id="terms" name="condition" checked />
+              <label class="checkbox2__label" for="terms" required>
+                <span class="checkbox__icon"></span>
+                J'ai lu et accepté les conditions d'utilisation.
+              </label>
+              <input class="checkbox__input" type="checkbox" id="events" name="condition" />
+              <label class="checkbox2__label" for="events">
+                <span class="checkbox__icon"></span>
+                Je souhaite être prévenu des prochains évènements.
+              </label>
+              <small class="terms__message--error"></small>
+            </div>
+
+            <div class="form__field">
+              <input type="submit" value="C'est parti !" class="btn__submit">
+            </div>
+          </form>
+        </div>
+
+        <div id="confirm__message" style="display: none;">
+          <i class="closeMsg fas fa-times" onclick="closeMessage()"></i>
+          <div id="confirm__message--style">
+            <img src="public/img/logo.png" alt="Logo GameOn">
+            <p>Votre inscription a bien été prise en compte !</p>
+          </div>
+          <button class="btn__message" type="button">Fermer</button>
+        </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="copyrights">
+      Copyright 2014 - 2022, GameOn Inc.
+    </p>
+  </footer>
+
+  <script src="scripts/modal.js"></script>
+  <script src="scripts/utils.js"></script>
+
+</body>
+
+</html>
